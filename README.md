@@ -24,7 +24,7 @@ Awesome TextField is a nice and simple libriary for iOS and Mac OSX. It's highly
 ##Objective-C version
 <em></em>
 
-[AwesomeTextField objective-c](https://github.com/NikoGenn/AwesomeTextField)
+[AwesomeTextField Objective-C](https://github.com/NikoGenn/AwesomeTextField)
 
 ##Credits
 <em></em>
