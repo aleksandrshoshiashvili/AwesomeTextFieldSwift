@@ -36,15 +36,15 @@ class AwesomeTextField: UITextField {
         
         self.drawLine()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didBeginChangeText", name: UITextFieldTextDidBeginEditingNotification, object: self)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didChangeText", name: UITextFieldTextDidChangeNotification, object: self)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didEndChangeText", name: UITextFieldTextDidEndEditingNotification, object: self)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AwesomeTextField.didBeginChangeText), name: UITextFieldTextDidBeginEditingNotification, object: self)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AwesomeTextField.didChangeText), name: UITextFieldTextDidChangeNotification, object: self)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AwesomeTextField.didEndChangeText), name: UITextFieldTextDidEndEditingNotification, object: self)
         
     }
     
     func drawLine() {
         
-        var underLine = UIView(frame:CGRectMake(0, self.frame.size.height - self.underLineWidth, self.frame.size.width, self.underLineWidth))
+        let underLine = UIView(frame:CGRectMake(0, self.frame.size.height - self.underLineWidth, self.frame.size.width, self.underLineWidth))
         
         underLine.backgroundColor = self.underLineColor
         underLine.alpha = self.underLineAlpha
@@ -59,12 +59,12 @@ class AwesomeTextField: UITextField {
         
         super.drawPlaceholderInRect(rect)
         
-        self.placeholderLabel = UILabel(frame: CGRectMake(rect.origin.x, self.underLineWidth, rect.size.width, self.font.pointSize))
+        self.placeholderLabel = UILabel(frame: CGRectMake(rect.origin.x, self.underLineWidth, rect.size.width, self.font!.pointSize))
         self.placeholderLabel.center = CGPointMake(self.placeholderLabel.center.x, self.frame.size.height - self.underlineView.frame.size.height - self.placeholderLabel.frame.size.height / 2)
         self.placeholderLabel.text = self.placeholder
         self.placeholder = nil
         
-        self.placeholderLabel.font = UIFont(name: self.font.fontName, size: self.font.pointSize)
+        self.placeholderLabel.font = UIFont(name: self.font!.fontName, size: self.font!.pointSize)
         
         self.placeholderLabel.textColor = self.placeholderTextColor
         self.placeholderLabel.alpha = self.placeholderAlphaBefore
@@ -76,13 +76,13 @@ class AwesomeTextField: UITextField {
     
     func drawPlaceholderIfTextExistInRect(rect: CGRect) {
         
-        self.placeholderLabel = UILabel(frame: CGRectMake(rect.origin.x, self.underLineWidth, rect.size.width, self.font.pointSize))
+        self.placeholderLabel = UILabel(frame: CGRectMake(rect.origin.x, self.underLineWidth, rect.size.width, self.font!.pointSize))
         self.placeholderLabel.transform = CGAffineTransformMakeScale(self.scaleCoeff, self.scaleCoeff)
         self.placeholderLabel.center = CGPointMake(self.placeholderLabel.center.x * self.scaleCoeff, 0 + self.placeholderLabel.frame.size.height)
         self.placeholderLabel.text = self.placeholder
         self.placeholder = nil
         
-        self.placeholderLabel.font = UIFont(name: self.font.fontName, size: self.font.pointSize)
+        self.placeholderLabel.font = UIFont(name: self.font!.fontName, size: self.font!.pointSize)
         
         self.placeholderLabel.textColor = self.placeholderTextColor
         self.placeholderLabel.alpha = self.placeholderAlphaAfter
@@ -134,10 +134,10 @@ class AwesomeTextField: UITextField {
                 
                 self.underlineView.alpha = 1.0
                 
-            }, completion: { (finished) -> Void in
-                if finished {
-                    self.isLifted = true
-                }
+                }, completion: { (finished) -> Void in
+                    if finished {
+                        self.isLifted = true
+                    }
             })
         } else {
             UIView.animateWithDuration(self.animationDuration, animations: { () -> Void in
@@ -153,7 +153,7 @@ class AwesomeTextField: UITextField {
     
     func didEndChangeText() {
         
-        if self.isLifted && self.text.isEmpty {
+        if self.isLifted && self.text!.isEmpty {
             UIView.animateWithDuration(self.animationDuration, animations: { () -> Void in
                 
                 self.placeholderLabel.alpha = self.placeholderAlphaBefore
