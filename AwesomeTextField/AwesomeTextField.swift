@@ -14,7 +14,8 @@ class AwesomeTextField: UITextField {
     
     @IBInspectable var underLineWidth : CGFloat = 2.0
     @IBInspectable var underLineColor : UIColor = UIColor.blackColor()
-    @IBInspectable var underLineAlpha : CGFloat = 0.5
+    @IBInspectable var underLineAlphaBefore : CGFloat = 0.5
+    @IBInspectable var underLineAlphaAfter : CGFloat = 1
     
     @IBInspectable var placeholderTextColor : UIColor = UIColor.grayColor()
     
@@ -47,7 +48,7 @@ class AwesomeTextField: UITextField {
         let underLine = UIView(frame:CGRectMake(0, self.frame.size.height - self.underLineWidth, self.frame.size.width, self.underLineWidth))
         
         underLine.backgroundColor = self.underLineColor
-        underLine.alpha = self.underLineAlpha
+        underLine.alpha = self.underLineAlphaBefore
         
         self.underlineView = underLine
         
@@ -132,7 +133,7 @@ class AwesomeTextField: UITextField {
                 self.placeholderLabel.alpha = self.placeholderAlphaAfter
                 self.placeholderLabel.center = CGPointMake(self.placeholderLabel.center.x * self.scaleCoeff, 0 + self.placeholderLabel.frame.size.height)
                 
-                self.underlineView.alpha = 1.0
+                self.underlineView.alpha = self.underLineAlphaAfter
                 
                 }, completion: { (finished) -> Void in
                     if finished {
@@ -141,7 +142,7 @@ class AwesomeTextField: UITextField {
             })
         } else {
             UIView.animateWithDuration(self.animationDuration, animations: { () -> Void in
-                self.underlineView.alpha = 1.0
+                self.underlineView.alpha = self.underLineAlphaAfter
             })
         }
         
@@ -160,7 +161,7 @@ class AwesomeTextField: UITextField {
                 self.placeholderLabel.center = CGPointMake(self.placeholderLabel.center.x / self.scaleCoeff, self.frame.size.height - self.underlineView.frame.size.height - self.placeholderLabel.frame.size.height / 2.0 - 2.0)
                 self.placeholderLabel.transform = CGAffineTransformIdentity
                 
-                self.underlineView.alpha = self.underLineAlpha
+                self.underlineView.alpha = self.underLineAlphaBefore
                 
                 }, completion: { (finished) -> Void in
                     if finished {
@@ -169,7 +170,7 @@ class AwesomeTextField: UITextField {
             })
         } else {
             UIView.animateWithDuration(self.animationDuration, animations: { () -> Void in
-                self.underlineView.alpha = self.underLineAlpha
+                self.underlineView.alpha = self.underLineAlphaBefore
             })
         }
         
