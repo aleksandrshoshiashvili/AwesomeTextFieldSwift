@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'AwesomeTextField_Example' do
+  pod 'AwesomeTextField', :path => '../'
+
+  target 'AwesomeTextField_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

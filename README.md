@@ -6,6 +6,20 @@ Awesome TextField is a nice and simple libriary for iOS and Mac OSX. It's highly
 
 ![icon](http://onemoreapp.ru/atext/afield.gif)
 
+## Example
+
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
+
+## Installation
+
+AwesomeTextField is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+pod "AwesomeTextField"
+```
+
+
 ##Usage
 <em></em>
 
@@ -26,10 +40,6 @@ Awesome TextField is a nice and simple libriary for iOS and Mac OSX. It's highly
 
 [AwesomeTextField Objective-C](https://github.com/NikoGenn/AwesomeTextField)
 
-##Credits
-<em></em>
-
-AwesomeTextField was inspired by [Nikita Maidanov](http://github.com/nikogenn) and created by [Aleksandr Shoshiashvili](https://github.com/aleksandrshoshiashvili)
-
-
-<a href="http://onemoreapp.ru"><img src="http://onemoreapp.ru/atext/oma.png" width="150px"></img></a>
+## Authors
+* [Aleksandr Shoshiashvili](https://github.com/aleksandrshoshiashvili)
+* [NikoGenn](https://github.com/NikoGenn)

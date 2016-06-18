@@ -97,7 +97,7 @@ class AwesomeTextField: UITextField {
     override func drawTextInRect(rect: CGRect) {
         super.drawTextInRect(rect)
         
-        if let placeholderText = self.placeholder {
+        if self.placeholder != nil {
             self.drawPlaceholderIfTextExistInRect(rect)
         }
         
