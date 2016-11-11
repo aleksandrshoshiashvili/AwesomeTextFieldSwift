@@ -9,8 +9,7 @@
 import UIKit
 
 @IBDesignable
-
-class AwesomeTextField: UITextField {
+open class AwesomeTextField: UITextField {
     
     @IBInspectable var underLineWidth : CGFloat = 2.0
     @IBInspectable var underLineColor : UIColor = UIColor.black
@@ -29,7 +28,7 @@ class AwesomeTextField: UITextField {
     var underlineView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     var isLifted = false
     
-    override func draw(_ rect: CGRect) {
+    override open func draw(_ rect: CGRect) {
         super.draw(rect)
         
         self.drawLine()
@@ -49,7 +48,7 @@ class AwesomeTextField: UITextField {
         self.addSubview(underlineView)
     }
     
-    override func drawPlaceholder(in rect: CGRect) {
+    override open func drawPlaceholder(in rect: CGRect) {
         super.drawPlaceholder(in: rect)
         
         placeholderLabel = UILabel(frame: CGRect(x: rect.origin.x, y: underLineWidth, width: rect.size.width, height: font!.pointSize))
@@ -83,7 +82,7 @@ class AwesomeTextField: UITextField {
         self.bringSubview(toFront: placeholderLabel)
     }
     
-    override func drawText(in rect: CGRect) {
+    override open func drawText(in rect: CGRect) {
         super.drawText(in: rect)
         
         if self.placeholder != nil {
@@ -94,14 +93,14 @@ class AwesomeTextField: UITextField {
         self.contentVerticalAlignment = .bottom
     }
     
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
+    override open func textRect(forBounds bounds: CGRect) -> CGRect {
         let insetForY = self.underLineWidth + 2.0
         self.textAlignment = .left
         self.contentVerticalAlignment = .bottom
         return bounds.insetBy(dx: self.textInsetX, dy: insetForY)
     }
     
-    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+    override open func editingRect(forBounds bounds: CGRect) -> CGRect {
         let insetForY = self.underLineWidth + 2.0
         self.textAlignment = .left
         self.contentVerticalAlignment = .bottom
