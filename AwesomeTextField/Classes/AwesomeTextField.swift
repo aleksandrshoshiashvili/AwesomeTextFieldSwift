@@ -13,139 +13,121 @@ import UIKit
 class AwesomeTextField: UITextField {
     
     @IBInspectable var underLineWidth : CGFloat = 2.0
-    @IBInspectable var underLineColor : UIColor = UIColor.blackColor()
+    @IBInspectable var underLineColor : UIColor = UIColor.black
     @IBInspectable var underLineAlphaBefore : CGFloat = 0.5
     @IBInspectable var underLineAlphaAfter : CGFloat = 1
     
-    @IBInspectable var placeholderTextColor : UIColor = UIColor.grayColor()
-    
-    @IBInspectable var animationDuration : NSTimeInterval = 0.35
+    @IBInspectable var placeholderTextColor : UIColor = UIColor.gray
+    @IBInspectable var animationDuration : TimeInterval = 0.35
     
     let scaleCoeff : CGFloat = 0.75
     let textInsetX : CGFloat = 1.5
     let placeholderAlphaAfter : CGFloat = 0.85
     let placeholderAlphaBefore : CGFloat = 0.5
     
-    var placeholderLabel = UILabel(frame: CGRectMake(0, 0, 0, 0))
-    var underlineView = UIView(frame: CGRectMake(0, 0, 0, 0))
+    var placeholderLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    var underlineView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     var isLifted = false
     
-    
-    override func drawRect(rect: CGRect) {
-        
-        super.drawRect(rect)
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         
         self.drawLine()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AwesomeTextField.didBeginChangeText), name: UITextFieldTextDidBeginEditingNotification, object: self)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AwesomeTextField.didChangeText), name: UITextFieldTextDidChangeNotification, object: self)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AwesomeTextField.didEndChangeText), name: UITextFieldTextDidEndEditingNotification, object: self)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(didBeginChangeText), name: NSNotification.Name.UITextFieldTextDidBeginEditing, object: self)
+        NotificationCenter.default.addObserver(self, selector: #selector(didChangeText), name: NSNotification.Name.UITextFieldTextDidChange, object: self)
+        NotificationCenter.default.addObserver(self, selector: #selector(didEndChangeText), name: NSNotification.Name.UITextFieldTextDidEndEditing, object: self)
     }
     
     func drawLine() {
+        let underLine = UIView(frame:CGRect(x: 0, y: frame.size.height - underLineWidth, width: frame.size.width, height: underLineWidth))
         
-        let underLine = UIView(frame:CGRectMake(0, self.frame.size.height - self.underLineWidth, self.frame.size.width, self.underLineWidth))
+        underLine.backgroundColor = underLineColor
+        underLine.alpha = underLineAlphaBefore
         
-        underLine.backgroundColor = self.underLineColor
-        underLine.alpha = self.underLineAlphaBefore
-        
-        self.underlineView = underLine
-        
-        self.addSubview(self.underlineView)
-        
+        underlineView = underLine
+        self.addSubview(underlineView)
     }
     
-    override func drawPlaceholderInRect(rect: CGRect) {
+    override func drawPlaceholder(in rect: CGRect) {
+        super.drawPlaceholder(in: rect)
         
-        super.drawPlaceholderInRect(rect)
-        
-        self.placeholderLabel = UILabel(frame: CGRectMake(rect.origin.x, self.underLineWidth, rect.size.width, self.font!.pointSize))
-        self.placeholderLabel.center = CGPointMake(self.placeholderLabel.center.x, self.frame.size.height - self.underlineView.frame.size.height - self.placeholderLabel.frame.size.height / 2)
-        self.placeholderLabel.text = self.placeholder
+        placeholderLabel = UILabel(frame: CGRect(x: rect.origin.x, y: underLineWidth, width: rect.size.width, height: font!.pointSize))
+        placeholderLabel.center = CGPoint(x: placeholderLabel.center.x, y: frame.size.height - underlineView.frame.size.height - placeholderLabel.frame.size.height / 2)
+        placeholderLabel.text = self.placeholder
         self.placeholder = nil
         
-        self.placeholderLabel.font = UIFont(name: self.font!.fontName, size: self.font!.pointSize)
+        placeholderLabel.font = UIFont(name: self.font!.fontName, size: self.font!.pointSize)
         
-        self.placeholderLabel.textColor = self.placeholderTextColor
-        self.placeholderLabel.alpha = self.placeholderAlphaBefore
+        placeholderLabel.textColor = placeholderTextColor
+        placeholderLabel.alpha = placeholderAlphaBefore
         
-        self.addSubview(self.placeholderLabel)
-        self.bringSubviewToFront(self.placeholderLabel)
-        
+        self.addSubview(placeholderLabel)
+        self.bringSubview(toFront: placeholderLabel)
     }
     
     func drawPlaceholderIfTextExistInRect(rect: CGRect) {
-        
-        self.placeholderLabel = UILabel(frame: CGRectMake(rect.origin.x, self.underLineWidth, rect.size.width, self.font!.pointSize))
-        self.placeholderLabel.transform = CGAffineTransformMakeScale(self.scaleCoeff, self.scaleCoeff)
-        self.placeholderLabel.center = CGPointMake(self.placeholderLabel.center.x * self.scaleCoeff, 0 + self.placeholderLabel.frame.size.height)
-        self.placeholderLabel.text = self.placeholder
+        placeholderLabel = UILabel(frame: CGRect(x: rect.origin.x, y: underLineWidth, width: rect.size.width, height: self.font!.pointSize))
+        placeholderLabel.transform = CGAffineTransform(scaleX: scaleCoeff, y: scaleCoeff)
+        placeholderLabel.center = CGPoint(x: placeholderLabel.center.x * scaleCoeff, y: 0 + placeholderLabel.frame.size.height)
+        placeholderLabel.text = self.placeholder
         self.placeholder = nil
         
-        self.placeholderLabel.font = UIFont(name: self.font!.fontName, size: self.font!.pointSize)
+        placeholderLabel.font = UIFont(name: self.font!.fontName, size: self.font!.pointSize)
         
-        self.placeholderLabel.textColor = self.placeholderTextColor
-        self.placeholderLabel.alpha = self.placeholderAlphaAfter
-        self.isLifted = true
+        placeholderLabel.textColor = placeholderTextColor
+        placeholderLabel.alpha = placeholderAlphaAfter
+        isLifted = true
         
-        self.addSubview(self.placeholderLabel)
-        self.bringSubviewToFront(self.placeholderLabel)
-        
+        self.addSubview(placeholderLabel)
+        self.bringSubview(toFront: placeholderLabel)
     }
     
-    override func drawTextInRect(rect: CGRect) {
-        super.drawTextInRect(rect)
+    override func drawText(in rect: CGRect) {
+        super.drawText(in: rect)
         
         if self.placeholder != nil {
-            self.drawPlaceholderIfTextExistInRect(rect)
+            drawPlaceholderIfTextExistInRect(rect: rect)
         }
         
-        self.textAlignment = .Left
-        self.contentVerticalAlignment = .Bottom
-        
+        self.textAlignment = .left
+        self.contentVerticalAlignment = .bottom
     }
     
-    override func textRectForBounds(bounds: CGRect) -> CGRect {
-        
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
         let insetForY = self.underLineWidth + 2.0
-        self.textAlignment = .Left
-        self.contentVerticalAlignment = .Bottom
-        return CGRectInset(bounds, self.textInsetX, insetForY)
-        
+        self.textAlignment = .left
+        self.contentVerticalAlignment = .bottom
+        return bounds.insetBy(dx: self.textInsetX, dy: insetForY)
     }
     
-    override func editingRectForBounds(bounds: CGRect) -> CGRect {
-        
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
         let insetForY = self.underLineWidth + 2.0
-        self.textAlignment = .Left
-        self.contentVerticalAlignment = .Bottom
-        return CGRectInset(bounds, self.textInsetX, insetForY)
+        self.textAlignment = .left
+        self.contentVerticalAlignment = .bottom
+        return bounds.insetBy(dx: self.textInsetX, dy: insetForY)
     }
     
     // MARK: - Delegate
     
     func didBeginChangeText() {
-        
         if !self.isLifted {
-            UIView.animateWithDuration(self.animationDuration, animations: { () -> Void in
-                self.placeholderLabel.transform = CGAffineTransformMakeScale(self.scaleCoeff, self.scaleCoeff)
+            UIView.animate(withDuration: animationDuration, animations: {
+                self.placeholderLabel.transform = CGAffineTransform(scaleX: self.scaleCoeff, y: self.scaleCoeff)
                 self.placeholderLabel.alpha = self.placeholderAlphaAfter
-                self.placeholderLabel.center = CGPointMake(self.placeholderLabel.center.x * self.scaleCoeff, 0 + self.placeholderLabel.frame.size.height)
-                
+                self.placeholderLabel.center = CGPoint(x: self.placeholderLabel.center.x * self.scaleCoeff, y: 0 + self.placeholderLabel.frame.size.height)
                 self.underlineView.alpha = self.underLineAlphaAfter
-                
-                }, completion: { (finished) -> Void in
-                    if finished {
-                        self.isLifted = true
-                    }
+            }, completion: { (finished) in
+                if finished {
+                    self.isLifted = true
+                }
             })
-        } else {
-            UIView.animateWithDuration(self.animationDuration, animations: { () -> Void in
+        }
+        else {
+            UIView.animate(withDuration: animationDuration, animations: {
                 self.underlineView.alpha = self.underLineAlphaAfter
             })
         }
-        
     }
     
     func didChangeText() {
@@ -153,33 +135,30 @@ class AwesomeTextField: UITextField {
     }
     
     func didEndChangeText() {
-        
         if self.isLifted && self.text!.isEmpty {
-            UIView.animateWithDuration(self.animationDuration, animations: { () -> Void in
-                
+            UIView.animate(withDuration: animationDuration, animations: {
                 self.placeholderLabel.alpha = self.placeholderAlphaBefore
-                self.placeholderLabel.center = CGPointMake(self.placeholderLabel.center.x / self.scaleCoeff, self.frame.size.height - self.underlineView.frame.size.height - self.placeholderLabel.frame.size.height / 2.0 - 2.0)
-                self.placeholderLabel.transform = CGAffineTransformIdentity
+                self.placeholderLabel.center = CGPoint(x: self.placeholderLabel.center.x / self.scaleCoeff, y: self.frame.size.height - self.underlineView.frame.size.height - self.placeholderLabel.frame.size.height / 2.0 - 2.0)
+                self.placeholderLabel.transform = CGAffineTransform.identity
                 
                 self.underlineView.alpha = self.underLineAlphaBefore
-                
-                }, completion: { (finished) -> Void in
-                    if finished {
-                        self.isLifted = false
-                    }
+            }, completion: { (finished) in
+                if finished {
+                    self.isLifted = false
+                }
             })
-        } else {
-            UIView.animateWithDuration(self.animationDuration, animations: { () -> Void in
+        }
+        else {
+            UIView.animate(withDuration: animationDuration, animations: {
                 self.underlineView.alpha = self.underLineAlphaBefore
             })
         }
-        
     }
     
     // MARK: - Dealloc
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
 }
