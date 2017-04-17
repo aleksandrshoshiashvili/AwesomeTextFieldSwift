@@ -20,7 +20,7 @@ pod "AwesomeTextField"
 ```
 
 
-##Usage
+## Usage
 <em></em>
 
 * Just drop awesomeTextField folder in your project.
@@ -35,7 +35,7 @@ pod "AwesomeTextField"
 
 * You're ready to use awesomeTextField!
 
-##Objective-C version
+## Objective-C version
 <em></em>
 
 [AwesomeTextField Objective-C](https://github.com/NikoGenn/AwesomeTextField)
