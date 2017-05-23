@@ -49,6 +49,7 @@ open class AwesomeTextField: UITextField {
 
     override open func drawPlaceholder(in rect: CGRect) {
         super.drawPlaceholder(in: rect)
+
         placeholderLabel = UILabel(frame: CGRect(x: rect.origin.x, y: underLineWidth, width: rect.size.width, height: font!.pointSize))
         placeholderLabel.center = CGPoint(x: placeholderLabel.center.x, y: frame.size.height - underlineView.frame.size.height - placeholderLabel.frame.size.height / 2)
         placeholderLabel.text = self.placeholder
