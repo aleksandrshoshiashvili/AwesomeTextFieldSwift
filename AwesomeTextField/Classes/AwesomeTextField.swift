@@ -50,7 +50,7 @@ open class AwesomeTextField: UITextField {
     override open func drawPlaceholder(in rect: CGRect) {
         super.drawPlaceholder(in: rect)
 
-        placeholderLabel = UILabel(frame: CGRect(x: rect.origin.x, y: underLineWidth width: rect.size.width, height: font!.pointSize))
+        placeholderLabel = UILabel(frame: CGRect(x: rect.origin.x, y: underLineWidth, width: rect.size.width, height: font!.pointSize))
         placeholderLabel.center = CGPoint(x: placeholderLabel.center.x, y: frame.size.height - underlineView.frame.size.height - placeholderLabel.frame.size.height / 2)
         placeholderLabel.text = self.placeholder
         self.placeholder = nil
@@ -130,7 +130,7 @@ open class AwesomeTextField: UITextField {
 
     func didChangeText() {
         if self.isLifted {
-            if self.text?.length == 0 {
+            if self.text?.characters.count == 0 {
                 UIView.animate(withDuration: animationDuration, animations: {
                     self.placeholderLabel.alpha = self.placeholderAlphaBefore
                     self.placeholderLabel.center = CGPoint(x: self.placeholderLabel.center.x / self.scaleCoeff, y: self.frame.size.height - self.underlineView.frame.size.height - self.placeholderLabel.frame.size.height / 2.0 - 2.0)
@@ -144,7 +144,7 @@ open class AwesomeTextField: UITextField {
             }
         }
         else {
-            if (self.text?.length)! > 0 {
+            if (self.text?.characters.count)! > 0 {
                 UIView.animate(withDuration: animationDuration, animations: {
                     self.placeholderLabel.transform = CGAffineTransform(scaleX: self.scaleCoeff, y: self.scaleCoeff)
                     self.placeholderLabel.alpha = self.placeholderAlphaAfter
