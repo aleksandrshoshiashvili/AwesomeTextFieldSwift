@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1FDBDDE81F06E952009999EE /* AwesomeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDBDDE71F06E952009999EE /* AwesomeTextField.swift */; };
 		5282455D1B5FE07F0004A55C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282455C1B5FE07F0004A55C /* AppDelegate.swift */; };
 		5282455F1B5FE07F0004A55C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282455E1B5FE07F0004A55C /* ViewController.swift */; };
 		528245621B5FE07F0004A55C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 528245601B5FE07F0004A55C /* Main.storyboard */; };
 		528245641B5FE07F0004A55C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 528245631B5FE07F0004A55C /* Images.xcassets */; };
 		528245671B5FE07F0004A55C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 528245651B5FE07F0004A55C /* LaunchScreen.xib */; };
 		528245731B5FE0800004A55C /* AwesomeTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528245721B5FE0800004A55C /* AwesomeTextFieldTests.swift */; };
-		5282457D1B5FE0A00004A55C /* AwesomeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282457C1B5FE0A00004A55C /* AwesomeTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1FDBDDE71F06E952009999EE /* AwesomeTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AwesomeTextField.swift; path = AwesomeTextField/AwesomeTextField.swift; sourceTree = "<group>"; };
 		528245571B5FE07F0004A55C /* AwesomeTextField.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AwesomeTextField.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5282455B1B5FE07F0004A55C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5282455C1B5FE07F0004A55C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -37,7 +38,6 @@
 		5282456C1B5FE0800004A55C /* AwesomeTextFieldTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AwesomeTextFieldTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		528245711B5FE0800004A55C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		528245721B5FE0800004A55C /* AwesomeTextFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwesomeTextFieldTests.swift; sourceTree = "<group>"; };
-		5282457C1B5FE0A00004A55C /* AwesomeTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwesomeTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +61,7 @@
 		1FF1A57F1B6191F000EEEAD8 /* AwesomeTextField */ = {
 			isa = PBXGroup;
 			children = (
-				5282457C1B5FE0A00004A55C /* AwesomeTextField.swift */,
+				1FDBDDE71F06E952009999EE /* AwesomeTextField.swift */,
 			);
 			name = AwesomeTextField;
 			sourceTree = "<group>";
@@ -174,9 +174,11 @@
 				TargetAttributes = {
 					528245561B5FE07F0004A55C = {
 						CreatedOnToolsVersion = 6.3.2;
+						LastSwiftMigration = 0830;
 					};
 					5282456B1B5FE0800004A55C = {
 						CreatedOnToolsVersion = 6.3.2;
+						LastSwiftMigration = 0830;
 						TestTargetID = 528245561B5FE07F0004A55C;
 					};
 				};
@@ -226,8 +228,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5282455F1B5FE07F0004A55C /* ViewController.swift in Sources */,
-				5282457D1B5FE0A00004A55C /* AwesomeTextField.swift in Sources */,
 				5282455D1B5FE07F0004A55C /* AppDelegate.swift in Sources */,
+				1FDBDDE81F06E952009999EE /* AwesomeTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +359,7 @@
 				INFOPLIST_FILE = AwesomeTextField/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -368,6 +371,7 @@
 				INFOPLIST_FILE = AwesomeTextField/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -387,6 +391,7 @@
 				INFOPLIST_FILE = AwesomeTextFieldTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AwesomeTextField.app/AwesomeTextField";
 			};
 			name = Debug;
@@ -402,6 +407,7 @@
 				INFOPLIST_FILE = AwesomeTextFieldTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AwesomeTextField.app/AwesomeTextField";
 			};
 			name = Release;

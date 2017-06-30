@@ -7,25 +7,22 @@
 //
 
 import UIKit
-import AwesomeTextField
 
 class ViewController: UIViewController {
-
-    @IBOutlet weak var awesomeTextField: AwesomeTextField!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
-        self.awesomeTextField .resignFirstResponder()
-        
-    }
-
+  
+  @IBOutlet weak var awesomeTextField: AwesomeTextField!
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+  }
+  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.awesomeTextField.resignFirstResponder()
+  }
+  
 }
 
