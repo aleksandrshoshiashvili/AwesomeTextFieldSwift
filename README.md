@@ -40,6 +40,8 @@ pod "AwesomeTextField"
 
 [AwesomeTextField Objective-C](https://github.com/NikoGenn/AwesomeTextField)
 
-## Authors
+## Author
 * [Aleksandr Shoshiashvili](https://github.com/aleksandrshoshiashvili)
+
+## Create pod and readme
 * [NikoGenn](https://github.com/NikoGenn)
