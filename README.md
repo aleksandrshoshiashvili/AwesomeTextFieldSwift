@@ -16,7 +16,7 @@ AwesomeTextField is available through [CocoaPods](http://cocoapods.org). To inst
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "AwesomeTextField"
+pod 'AwesomeTextFieldSwift'
 ```
 
 
