@@ -25,7 +25,7 @@ Awesome TextField is a nice and simple library for iOS and Mac OSX. It's highly 
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Alex Shoshiashvili' => 'aleksandr.shoshiashvili@gmail.com' }
-  s.source           = { :git => 'https://github.com/aleksandrshoshiashvili/AwesomeTextFieldSwift.git', :tag => 'v0.2.1' }
+  s.source           = { :git => 'https://github.com/aleksandrshoshiashvili/AwesomeTextFieldSwift.git', :tag => '0.2.1' }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
