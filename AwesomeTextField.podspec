@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'AwesomeTextField'
+  s.name             = 'AwesomeTextFieldSwift'
   s.version          = '0.2.1'
   s.summary          = 'AwesomeTextField is a UITextField with sliding-up placeholder while editing'
 
