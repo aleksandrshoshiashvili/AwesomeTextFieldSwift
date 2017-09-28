@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AwesomeTextField'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'AwesomeTextField is a UITextField with sliding-up placeholder while editing'
 
 # This description is used to generate tags and improve search results.
@@ -24,8 +24,8 @@ Awesome TextField is a nice and simple library for iOS and Mac OSX. It's highly 
   s.homepage         = 'https://github.com/aleksandrshoshiashvili/AwesomeTextFieldSwift'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'NikoGenn' => 'nikogenn96@mail.ru' }
-  s.source           = { :git => 'https://github.com/aleksandrshoshiashvili/AwesomeTextFieldSwift.git', :tag => 'v0.1.0' }
+  s.author           = { 'Alex Shoshiashvili' => 'aleksandr.shoshiashvili@gmail.com' }
+  s.source           = { :git => 'https://github.com/aleksandrshoshiashvili/AwesomeTextFieldSwift.git', :tag => 'v0.1.1' }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
@@ -36,7 +36,4 @@ Awesome TextField is a nice and simple library for iOS and Mac OSX. It's highly 
   #   'AwesomeTextField' => ['AwesomeTextField/Assets/*.png']
   # }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end
