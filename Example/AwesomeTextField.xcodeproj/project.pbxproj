@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1FDBDDE81F06E952009999EE /* AwesomeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDBDDE71F06E952009999EE /* AwesomeTextField.swift */; };
 		5282455D1B5FE07F0004A55C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282455C1B5FE07F0004A55C /* AppDelegate.swift */; };
 		5282455F1B5FE07F0004A55C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282455E1B5FE07F0004A55C /* ViewController.swift */; };
 		528245621B5FE07F0004A55C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 528245601B5FE07F0004A55C /* Main.storyboard */; };
 		528245641B5FE07F0004A55C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 528245631B5FE07F0004A55C /* Images.xcassets */; };
 		528245671B5FE07F0004A55C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 528245651B5FE07F0004A55C /* LaunchScreen.xib */; };
 		528245731B5FE0800004A55C /* AwesomeTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528245721B5FE0800004A55C /* AwesomeTextFieldTests.swift */; };
+		6CC0A677202F606B00F38FBD /* AwesomeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC0A676202F606B00F38FBD /* AwesomeTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,7 +27,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1FDBDDE71F06E952009999EE /* AwesomeTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwesomeTextField.swift; sourceTree = "<group>"; };
 		528245571B5FE07F0004A55C /* AwesomeTextField.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AwesomeTextField.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5282455B1B5FE07F0004A55C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5282455C1B5FE07F0004A55C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +37,7 @@
 		5282456C1B5FE0800004A55C /* AwesomeTextFieldTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AwesomeTextFieldTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		528245711B5FE0800004A55C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		528245721B5FE0800004A55C /* AwesomeTextFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwesomeTextFieldTests.swift; sourceTree = "<group>"; };
+		6CC0A676202F606B00F38FBD /* AwesomeTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwesomeTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +79,7 @@
 		528245591B5FE07F0004A55C /* AwesomeTextField */ = {
 			isa = PBXGroup;
 			children = (
-				6CC0A674202F40B400F38FBD /* AwesomeTextField */,
+				6CC0A675202F606B00F38FBD /* AwesomeTextField */,
 				5282455C1B5FE07F0004A55C /* AppDelegate.swift */,
 				5282455E1B5FE07F0004A55C /* ViewController.swift */,
 				528245601B5FE07F0004A55C /* Main.storyboard */,
@@ -115,12 +115,12 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		6CC0A674202F40B400F38FBD /* AwesomeTextField */ = {
+		6CC0A675202F606B00F38FBD /* AwesomeTextField */ = {
 			isa = PBXGroup;
 			children = (
-				1FDBDDE71F06E952009999EE /* AwesomeTextField.swift */,
+				6CC0A676202F606B00F38FBD /* AwesomeTextField.swift */,
 			);
-			name = AwesomeTextField;
+			path = AwesomeTextField;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,8 +228,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5282455F1B5FE07F0004A55C /* ViewController.swift in Sources */,
+				6CC0A677202F606B00F38FBD /* AwesomeTextField.swift in Sources */,
 				5282455D1B5FE07F0004A55C /* AppDelegate.swift in Sources */,
-				1FDBDDE81F06E952009999EE /* AwesomeTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
