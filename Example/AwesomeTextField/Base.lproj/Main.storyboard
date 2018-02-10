@@ -30,7 +30,7 @@
                                 <rect key="frame" x="97.5" y="143.5" width="180" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="T7b-Z3-3QP"/>
-                                    <constraint firstAttribute="width" constant="180" id="vpH-39-NQo"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="vpH-39-NQo"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>

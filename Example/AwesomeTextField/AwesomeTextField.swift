@@ -53,7 +53,11 @@ open class AwesomeTextField: UITextField {
     
     guard let font = font else { return }
     
-    placeholderLabel = UILabel(frame: CGRect(x: rect.origin.x, y: underLineWidth, width: rect.size.width, height: font.pointSize))
+    let placeholderRect = CGRect(x: rect.origin.x,
+                                 y: underLineWidth,
+                                 width: rect.size.width,
+                                 height: font.pointSize)
+    placeholderLabel = UILabel(frame: placeholderRect)
     placeholderLabel.center = CGPoint(x: placeholderLabel.center.x, y: frame.size.height - underlineView.frame.size.height - placeholderLabel.frame.size.height / 2)
     placeholderLabel.text = placeholder
     placeholder = nil
@@ -72,9 +76,14 @@ open class AwesomeTextField: UITextField {
   func drawPlaceholderIfTextExistInRect(rect: CGRect) {
     guard let font = font else { return }
     
-    placeholderLabel = UILabel(frame: CGRect(x: rect.origin.x, y: underLineWidth*2, width: rect.size.width, height: font.pointSize))
+    let placeholderRect = CGRect(x: rect.origin.x,
+                                 y: underLineWidth * 2,
+                                 width: rect.size.width,
+                                 height: font.pointSize)
+    placeholderLabel = UILabel(frame: placeholderRect)
     placeholderLabel.transform = CGAffineTransform(scaleX: scaleCoeff, y: scaleCoeff)
-    placeholderLabel.center = CGPoint(x: placeholderLabel.center.x * scaleCoeff, y: 0 + placeholderLabel.frame.size.height)
+    placeholderLabel.center = CGPoint(x: placeholderLabel.center.x * scaleCoeff,
+                                      y: placeholderLabel.frame.size.height)
     placeholderLabel.text = placeholder
     placeholder = nil
     
@@ -122,59 +131,84 @@ open class AwesomeTextField: UITextField {
         self.placeholderLabel.alpha = self.placeholderAlphaAfter
         self.placeholderLabel.center = CGPoint(x: self.placeholderLabel.center.x * self.scaleCoeff, y: 0 + self.placeholderLabel.frame.size.height)
         self.underlineView.alpha = self.underLineAlphaAfter
-      }, completion: { (finished) in
-        if finished {
-          self.isLifted = true
-        }
-      })
-    }
-    else {
-      UIView.animate(withDuration: animationDuration, animations: {
-        self.underlineView.alpha = self.underLineAlphaAfter
-      })
+      }, completion: isLiftedCompletion(withNewValue: true))
+    } else {
+      animateUnderline(withAlpha: underLineAlphaAfter)
     }
   }
   
   @objc func didChangeText() {
     if isLifted {
       if text?.count == 0 {
-        UIView.animate(withDuration: animationDuration, animations: {
-          self.placeholderLabel.alpha = self.placeholderAlphaBefore
-          self.placeholderLabel.center = CGPoint(x: min(self.placeholderLabelMinCenter / self.scaleCoeff, self.placeholderLabel.center.x / self.scaleCoeff), y: self.frame.size.height - self.underlineView.frame.size.height - self.placeholderLabel.frame.size.height / 2.0 - 2.0)
-          self.placeholderLabel.transform = CGAffineTransform.identity
-          self.underlineView.alpha = self.underLineAlphaBefore
-        }, completion: { (finished) in
-          if finished {
-            self.isLifted = false
-          }
-        })
+        let newCenterX = min(self.placeholderLabelMinCenter / self.scaleCoeff, self.placeholderLabel.center.x / self.scaleCoeff)
+        let newCenterY = self.frame.size.height - self.underlineView.frame.size.height - self.placeholderLabel.frame.size.height / 2.0 - 2.0
+        let newCenter = CGPoint(x: newCenterX, y: newCenterY)
+        
+        animatePlaceholder(withNewCenter: newCenter,
+                           scaleCoeff: 1,
+                           newAlpha: placeholderAlphaBefore,
+                           underlineAlpha: underLineAlphaBefore,
+                           isLiftedAfterFinishing: false)
       }
-    }
-    else {
+    } else {
       if text?.count != 0 {
-        UIView.animate(withDuration: animationDuration, animations: {
-          self.placeholderLabel.transform = CGAffineTransform(scaleX: self.scaleCoeff, y: self.scaleCoeff)
-          self.placeholderLabel.alpha = self.placeholderAlphaAfter
-          self.placeholderLabel.center = CGPoint(x: max(self.placeholderLabelMinCenter, self.placeholderLabel.center.x * self.scaleCoeff), y: 0 + self.placeholderLabel.frame.size.height)
-          self.underlineView.alpha = self.underLineAlphaAfter
-        }, completion: { (finished) in
-          if finished {
-            self.isLifted = true
-          }
-        })
+        let newCenterX = max(placeholderLabelMinCenter, placeholderLabel.center.x * scaleCoeff)
+        let newCenter = CGPoint(x: newCenterX,
+                                y: placeholderLabel.frame.size.height)
+        animatePlaceholder(withNewCenter: newCenter,
+                           scaleCoeff: scaleCoeff,
+                           newAlpha: placeholderAlphaAfter,
+                           underlineAlpha: underLineAlphaAfter,
+                           isLiftedAfterFinishing: true)
       } else {
-        UIView.animate(withDuration: animationDuration, animations: {
-          self.underlineView.alpha = self.underLineAlphaBefore
-        })
+        animateUnderline(withAlpha: underLineAlphaBefore)
       }
     }
     
+  }
+  
+  func animateUnderline(withAlpha alpha: CGFloat) {
+    UIView.animate(withDuration: animationDuration, animations: {
+      self.underlineView.alpha = alpha
+    })
+  }
+  
+  func animatePlaceholder(withNewCenter newCenter: CGPoint,
+                          scaleCoeff: CGFloat,
+                          newAlpha: CGFloat,
+                          underlineAlpha: CGFloat,
+                          isLiftedAfterFinishing: Bool) {
+    UIView.animate(withDuration: animationDuration, animations: {
+      self.placeholderLabel.transform(withCoeff: scaleCoeff, andMoveCenterToPoint: newCenter)
+      self.placeholderLabel.alpha = newAlpha
+      self.underlineView.alpha = underlineAlpha
+    }, completion: isLiftedCompletion(withNewValue: isLiftedAfterFinishing))
+  }
+  
+  // MARK: - Private
+  
+  private func isLiftedCompletion(withNewValue value: Bool) -> ((Bool) -> Void)? {
+    return { (finished) in
+      if finished {
+        self.isLifted = value
+      }
+    }
   }
   
   // MARK: - Dealloc
   
   deinit {
     NotificationCenter.default.removeObserver(self)
+  }
+  
+}
+
+extension UIView {
+  
+  func transform(withCoeff coeff: CGFloat, andMoveCenterToPoint center: CGPoint) {
+    let transform = CGAffineTransform(scaleX: coeff, y: coeff)
+    self.transform = transform
+    self.center = center
   }
   
 }
