@@ -26,7 +26,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="доодллод" placeholder="awesome" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eXS-Rk-UDr" customClass="AwesomeTextField" customModule="AwesomeTextField" customModuleProvider="target">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="awesome" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eXS-Rk-UDr" customClass="AwesomeTextField" customModule="AwesomeTextField" customModuleProvider="target">
                                 <rect key="frame" x="97.5" y="143.5" width="180" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="T7b-Z3-3QP"/>
@@ -62,6 +62,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="33.733133433283363"/>
         </scene>
     </scenes>
 </document>

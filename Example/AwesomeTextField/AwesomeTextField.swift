@@ -11,6 +11,8 @@ import UIKit
 @IBDesignable
 open class AwesomeTextField: UITextField {
   
+  // MARK: - Property
+  
   @IBInspectable var underLineWidth: CGFloat = 2.0
   @IBInspectable var underLineColor: UIColor = .black
   @IBInspectable var underLineAlphaBefore: CGFloat = 0.5
@@ -29,13 +31,12 @@ open class AwesomeTextField: UITextField {
   var underlineView = UIView(frame: CGRect.zero)
   var isLifted = false
   
+  // MARK: - Setup
+  
   override open func draw(_ rect: CGRect) {
     super.draw(rect)
-    
     drawLine()
-    
-    NotificationCenter.default.addObserver(self, selector: #selector(didBeginChangeText), name: NSNotification.Name.UITextFieldTextDidBeginEditing, object: self)
-    NotificationCenter.default.addObserver(self, selector: #selector(didChangeText), name: NSNotification.Name.UITextFieldTextDidChange, object: self)
+    setupObserver()
   }
   
   func drawLine() {
@@ -125,18 +126,11 @@ open class AwesomeTextField: UITextField {
     return bounds.insetBy(dx: textInsetX, dy: insetForY)
   }
   
-  // MARK: - Delegate
+  // MARK: - Notification actions
   
   @objc func didBeginChangeText() {
     if !isLifted {
-      let newCenterX = max(placeholderLabelMinCenter, placeholderLabel.center.x * scaleCoeff)
-      let newCenter = CGPoint(x: newCenterX,
-                              y: placeholderLabel.frame.size.height)
-      animatePlaceholder(withNewCenter: newCenter,
-                         scaleCoeff: scaleCoeff,
-                         newAlpha: placeholderAlphaAfter,
-                         underlineAlpha: underLineAlphaAfter,
-                         isLiftedAfterFinishing: true)
+      liftUpPlaceholder()
     } else {
       animateUnderline(withAlpha: underLineAlphaAfter)
     }
@@ -144,41 +138,58 @@ open class AwesomeTextField: UITextField {
   
   @objc func didChangeText() {
     if isLifted {
-      if text?.count == 0 {
-        let newCenterX = min(self.placeholderLabelMinCenter / self.scaleCoeff, self.placeholderLabel.center.x / self.scaleCoeff)
-        let newCenterY = self.frame.size.height - self.underlineView.frame.size.height - self.placeholderLabel.frame.size.height / 2.0 - 2.0
-        let newCenter = CGPoint(x: newCenterX, y: newCenterY)
-        
-        animatePlaceholder(withNewCenter: newCenter,
-                           scaleCoeff: 1,
-                           newAlpha: placeholderAlphaBefore,
-                           underlineAlpha: underLineAlphaBefore,
-                           isLiftedAfterFinishing: false)
-      }
+      liftDownPlaceholderIfTextIsEmpty()
     } else {
       if text?.count != 0 {
-        let newCenterX = max(placeholderLabelMinCenter, placeholderLabel.center.x * scaleCoeff)
-        let newCenter = CGPoint(x: newCenterX,
-                                y: placeholderLabel.frame.size.height)
-        animatePlaceholder(withNewCenter: newCenter,
-                           scaleCoeff: scaleCoeff,
-                           newAlpha: placeholderAlphaAfter,
-                           underlineAlpha: underLineAlphaAfter,
-                           isLiftedAfterFinishing: true)
+        liftUpPlaceholder()
       } else {
         animateUnderline(withAlpha: underLineAlphaBefore)
       }
     }
-    
   }
   
-  func animateUnderline(withAlpha alpha: CGFloat) {
+  @objc func didEndChangingText() {
+    liftDownPlaceholderIfTextIsEmpty()
+  }
+  
+  // MARK: - Private
+  
+  // MARK: LiftUp/LiftDown
+  
+  private func liftUpPlaceholder() {
+    let newCenterX = max(placeholderLabelMinCenter, placeholderLabel.center.x * scaleCoeff)
+    let newCenter = CGPoint(x: newCenterX,
+                            y: placeholderLabel.frame.size.height)
+    animatePlaceholder(withNewCenter: newCenter,
+                       scaleCoeff: scaleCoeff,
+                       newAlpha: placeholderAlphaAfter,
+                       underlineAlpha: underLineAlphaAfter,
+                       isLiftedAfterFinishing: true)
+  }
+  
+  private func liftDownPlaceholderIfTextIsEmpty() {
+    if text?.count == 0 {
+      let newCenterX = min(placeholderLabelMinCenter / scaleCoeff, placeholderLabel.center.x / scaleCoeff)
+      let newCenterY = frame.size.height - underlineView.frame.size.height - placeholderLabel.frame.size.height / 2.0 - 2.0
+      let newCenter = CGPoint(x: newCenterX, y: newCenterY)
+      
+      animatePlaceholder(withNewCenter: newCenter,
+                         scaleCoeff: 1,
+                         newAlpha: placeholderAlphaBefore,
+                         underlineAlpha: underLineAlphaBefore,
+                         isLiftedAfterFinishing: false)
+    }
+  }
+  
+  // MARK: - Animations
+  
+  private func animateUnderline(withAlpha alpha: CGFloat) {
     UIView.animate(withDuration: animationDuration, animations: {
       self.underlineView.alpha = alpha
     })
   }
   
-  func animatePlaceholder(withNewCenter newCenter: CGPoint,
+  private func animatePlaceholder(withNewCenter newCenter: CGPoint,
                           scaleCoeff: CGFloat,
                           newAlpha: CGFloat,
                           underlineAlpha: CGFloat,
@@ -190,14 +201,20 @@ open class AwesomeTextField: UITextField {
     }, completion: isLiftedCompletion(withNewValue: isLiftedAfterFinishing))
   }
   
-  // MARK: - Private
-  
   private func isLiftedCompletion(withNewValue value: Bool) -> ((Bool) -> Void)? {
     return { (finished) in
       if finished {
         self.isLifted = value
       }
     }
+  }
+  
+  // MARK: Notification
+  
+  private func setupObserver() {
+    NotificationCenter.default.addObserver(self, selector: #selector(didBeginChangeText), name: NSNotification.Name.UITextFieldTextDidBeginEditing, object: self)
+    NotificationCenter.default.addObserver(self, selector: #selector(didChangeText), name: NSNotification.Name.UITextFieldTextDidChange, object: self)
+    NotificationCenter.default.addObserver(self, selector: #selector(didEndChangingText), name: NSNotification.Name.UITextFieldTextDidEndEditing, object: self)
   }
   
   // MARK: - Dealloc
@@ -208,7 +225,9 @@ open class AwesomeTextField: UITextField {
   
 }
 
-extension UIView {
+// MARK: - UIView Extension
+
+private extension UIView {
   
   func transform(withCoeff coeff: CGFloat, andMoveCenterToPoint center: CGPoint) {
     let transform = CGAffineTransform(scaleX: coeff, y: coeff)
