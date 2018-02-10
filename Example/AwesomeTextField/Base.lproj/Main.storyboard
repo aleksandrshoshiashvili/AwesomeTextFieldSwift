@@ -26,11 +26,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="awesome" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eXS-Rk-UDr" customClass="AwesomeTextField" customModule="AwesomeTextField" customModuleProvider="target">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="доодллод" placeholder="awesome" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eXS-Rk-UDr" customClass="AwesomeTextField" customModule="AwesomeTextField" customModuleProvider="target">
                                 <rect key="frame" x="97.5" y="143.5" width="180" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="T7b-Z3-3QP"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="vpH-39-NQo"/>
+                                    <constraint firstAttribute="width" constant="180" id="vpH-39-NQo"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -53,7 +53,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="eXS-Rk-UDr" secondAttribute="centerX" id="9vD-n8-Vqr"/>
-                            <constraint firstAttribute="centerY" secondItem="eXS-Rk-UDr" secondAttribute="centerY" constant="160" id="B2n-lc-2aB"/>
+                            <constraint firstItem="eXS-Rk-UDr" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="123.5" id="YfZ-Ee-beE"/>
                         </constraints>
                     </view>
                     <connections>

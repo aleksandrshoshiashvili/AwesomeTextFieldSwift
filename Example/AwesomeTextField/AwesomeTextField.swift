@@ -58,7 +58,8 @@ open class AwesomeTextField: UITextField {
                                  width: rect.size.width,
                                  height: font.pointSize)
     placeholderLabel = UILabel(frame: placeholderRect)
-    placeholderLabel.center = CGPoint(x: placeholderLabel.center.x, y: frame.size.height - underlineView.frame.size.height - placeholderLabel.frame.size.height / 2)
+    placeholderLabel.center = CGPoint(x: placeholderLabel.center.x,
+                                      y: frame.size.height - underlineView.frame.size.height - placeholderLabel.frame.size.height / 2)
     placeholderLabel.text = placeholder
     placeholder = nil
     
@@ -93,6 +94,8 @@ open class AwesomeTextField: UITextField {
     placeholderLabel.alpha = placeholderAlphaAfter
     isLifted = true
     
+    placeholderLabelMinCenter = placeholderLabel.center.x
+    
     addSubview(placeholderLabel)
     bringSubview(toFront: placeholderLabel)
   }
@@ -126,12 +129,14 @@ open class AwesomeTextField: UITextField {
   
   @objc func didBeginChangeText() {
     if !isLifted {
-      UIView.animate(withDuration: animationDuration, animations: {
-        self.placeholderLabel.transform = CGAffineTransform(scaleX: self.scaleCoeff, y: self.scaleCoeff)
-        self.placeholderLabel.alpha = self.placeholderAlphaAfter
-        self.placeholderLabel.center = CGPoint(x: self.placeholderLabel.center.x * self.scaleCoeff, y: 0 + self.placeholderLabel.frame.size.height)
-        self.underlineView.alpha = self.underLineAlphaAfter
-      }, completion: isLiftedCompletion(withNewValue: true))
+      let newCenterX = max(placeholderLabelMinCenter, placeholderLabel.center.x * scaleCoeff)
+      let newCenter = CGPoint(x: newCenterX,
+                              y: placeholderLabel.frame.size.height)
+      animatePlaceholder(withNewCenter: newCenter,
+                         scaleCoeff: scaleCoeff,
+                         newAlpha: placeholderAlphaAfter,
+                         underlineAlpha: underLineAlphaAfter,
+                         isLiftedAfterFinishing: true)
     } else {
       animateUnderline(withAlpha: underLineAlphaAfter)
     }
