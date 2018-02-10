@@ -42,6 +42,3 @@ pod 'AwesomeTextFieldSwift'
 
 ## Author
 * [Aleksandr Shoshiashvili](https://github.com/aleksandrshoshiashvili)
-
-## Create readme
-* [NikoGenn](https://github.com/NikoGenn)
