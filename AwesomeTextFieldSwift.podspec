@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AwesomeTextFieldSwift'
-  s.version          = '0.2.1'
+  s.version          = '0.2.4'
   s.summary          = 'AwesomeTextField is a UITextField with sliding-up placeholder while editing'
 
 # This description is used to generate tags and improve search results.
