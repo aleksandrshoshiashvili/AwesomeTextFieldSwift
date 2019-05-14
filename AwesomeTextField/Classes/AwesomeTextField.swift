@@ -72,7 +72,7 @@ open class AwesomeTextField: UITextField {
     placeholderLabelMinCenter = placeholderLabel.center.x * scaleCoeff
     
     addSubview(placeholderLabel)
-    bringSubview(toFront: placeholderLabel)
+    bringSubviewToFront(placeholderLabel)
   }
   
   func drawPlaceholderIfTextExistInRect(rect: CGRect) {
@@ -98,7 +98,7 @@ open class AwesomeTextField: UITextField {
     placeholderLabelMinCenter = placeholderLabel.center.x
     
     addSubview(placeholderLabel)
-    bringSubview(toFront: placeholderLabel)
+    bringSubviewToFront(placeholderLabel)
   }
   
   override open func drawText(in rect: CGRect) {
@@ -212,9 +212,9 @@ open class AwesomeTextField: UITextField {
   // MARK: Notification
   
   private func setupObserver() {
-    NotificationCenter.default.addObserver(self, selector: #selector(didBeginChangeText), name: NSNotification.Name.UITextFieldTextDidBeginEditing, object: self)
-    NotificationCenter.default.addObserver(self, selector: #selector(didChangeText), name: NSNotification.Name.UITextFieldTextDidChange, object: self)
-    NotificationCenter.default.addObserver(self, selector: #selector(didEndChangingText), name: NSNotification.Name.UITextFieldTextDidEndEditing, object: self)
+    NotificationCenter.default.addObserver(self, selector: #selector(didBeginChangeText), name: UITextField.textDidBeginEditingNotification, object: self)
+    NotificationCenter.default.addObserver(self, selector: #selector(didChangeText), name: UITextField.textDidChangeNotification, object: self)
+    NotificationCenter.default.addObserver(self, selector: #selector(didEndChangingText), name: UITextField.textDidEndEditingNotification, object: self)
   }
   
   // MARK: - Dealloc
